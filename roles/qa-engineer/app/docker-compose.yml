@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      DB_PATH: /app/data/sabhaghar.sqlite
+      # Minimum notice, in days, the office needs for a new booking request.
+      # This is intentional product behaviour, not a defect. See SPEC.md §7.
+      BOOKING_LEAD_DAYS: 3
+      ORG_TIMEZONE: America/Chicago
+    volumes:
+      - appdata:/app/data
+
+volumes:
+  appdata:

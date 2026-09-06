@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book a space | Himalaya Cultural Centre</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">Himalaya Cultural Centre</div>
+    <nav>
+      <a href="/">Book a space</a>
+      <a href="/staff.html">Staff</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Book a space</h1>
+    <p class="story">
+      Halls, the courtyard, the kitchen and the classrooms are available to members for
+      weddings, ceremonies, classes and meetings. Requests are reviewed by the office and
+      confirmed within two working days.
+    </p>
+
+    <h2>Spaces</h2>
+    <div class="spaces" id="spaces"></div>
+
+    <h2>Availability</h2>
+    <div class="card">
+      <div class="row">
+        <div>
+          <label for="availDate">Date</label>
+          <input type="date" id="availDate" value="2026-11-07" />
+        </div>
+        <div>
+          <label for="availSpace">Space</label>
+          <select id="availSpace"></select>
+        </div>
+      </div>
+      <div id="availNote" class="err"></div>
+      <div class="slots" id="slots"></div>
+    </div>
+
+    <h2>Request a booking</h2>
+    <div class="card" id="requestCard">
+      <div id="signinPrompt">
+        <p class="story">Members sign in to request a space.</p>
+        <div class="row">
+          <div><label for="email">Email</label><input id="email" value="member@himalayacc.example" /></div>
+          <div><label for="password">Password</label><input id="password" type="password" value="member12345" /></div>
+        </div>
+        <button id="signin">Sign in</button>
+        <div class="err" id="signinErr"></div>
+      </div>
+
+      <form id="requestForm" class="hidden">
+        <div class="row">
+          <div>
+            <label for="fSpace">Space</label>
+            <select id="fSpace"></select>
+          </div>
+          <div>
+            <label for="fDate">Event date</label>
+            <input type="date" id="fDate" value="2026-11-14" />
+          </div>
+        </div>
+        <div class="row">
+          <div><label for="fStart">Start</label><input id="fStart" value="10:00" /></div>
+          <div><label for="fEnd">End</label><input id="fEnd" value="14:00" /></div>
+          <div><label for="fAttendees">Attendees</label><input id="fAttendees" type="number" value="40" /></div>
+        </div>
+        <div class="row">
+          <div><label for="fPurpose">What is it for</label><input id="fPurpose" value="Community meeting" /></div>
+          <div>
+            <label for="fVisibility">Show on the public calendar</label>
+            <select id="fVisibility">
+              <option value="public">Yes — show the event</option>
+              <option value="private">No — private event</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="fNotes">Notes for the office (optional)</label>
+            <textarea id="fNotes" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="row" id="addonRow"></div>
+        <p class="story" id="quote"></p>
+        <button type="submit">Send request</button>
+        <div class="err" id="formErr"></div>
+      </form>
+    </div>
+
+    <h2>What is on</h2>
+    <div class="card" id="calendar"></div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
