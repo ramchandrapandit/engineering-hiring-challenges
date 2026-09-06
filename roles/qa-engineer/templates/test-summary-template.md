@@ -79,6 +79,21 @@ In order, with a rough size.
 
 1. …
 
+## Tooling recommendation
+
+Half a page. What this team should standardise on, and who owns it.
+
+- **The framework, and why** — Playwright, Cypress or Selenium; TypeScript or Python. Say
+  what decided it: the team's languages, the app's shape, the trace and debugging story.
+- **Code-first, or an AI-driven platform?** Take a position on Mabl, Testim, Katalon,
+  Tricentis Tosca, Applitools and the like. Self-healing locators and natural-language
+  authoring are real time-savers and a real licence cost; visual comparison catches a class
+  of defect assertions never will. Say what it would cost, what it would save, what you
+  would still write by hand, and at what team size the answer changes.
+- **What you would not automate**, and why that is the right call.
+
+If you trialled one, say what it did better than your code and what it did worse.
+
 ## What I would ask the developers to change
 
 To make this application easier to test and harder to break. Stable selectors, a test-data

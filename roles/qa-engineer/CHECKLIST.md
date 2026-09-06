@@ -13,6 +13,10 @@ Do this before you record the video, so the video shows the finished version.
       is a contradiction and I have not shipped one
 - [ ] No `waitForTimeout` used as a synchronisation strategy
 - [ ] Test names describe behaviour, not endpoints
+- [ ] Locators are roles, labels or test ids — nothing that breaks when a `<div>` moves
+- [ ] **The CI workflow has actually run and I have seen it pass** — a workflow file nobody
+      has run is not a pipeline
+- [ ] My README states the wall-clock runtime of the suite
 
 ## Coverage
 
@@ -34,6 +38,8 @@ Do this before you record the video, so the video shows the finished version.
 - [ ] **I re-read `SPEC.md` §7** and none of my reports is documented behaviour
 - [ ] No two reports describe the same underlying defect
 - [ ] Anything I was unsure about is filed as a question, with my reasoning
+- [ ] At least one report carries **acceptance criteria for the fix** a developer could build
+      against
 
 ## The write-up
 
@@ -41,6 +47,8 @@ Do this before you record the video, so the video shows the finished version.
 - [ ] `TEST-SUMMARY.md` — ranked table, coverage gaps, **and a go/no-go recommendation with
       conditions**. I took a position.
 - [ ] I said what I did not test and what the residual risk is
+- [ ] `TEST-SUMMARY.md` ends with the **tooling recommendation** — code-first or an
+      AI-driven platform, chosen, priced and defended
 - [ ] `AI-USAGE.md` exists and is honest and specific
 - [ ] More than one commit, human messages, nothing called `final`
 

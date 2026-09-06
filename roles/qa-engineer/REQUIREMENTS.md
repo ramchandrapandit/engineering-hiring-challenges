@@ -47,6 +47,10 @@ Each report needs:
   purpose of the events they marked private, by changing a reference in the URL"
 - **environment**
 - **suggested fix or area**, if you have one. Optional, and appreciated.
+- **acceptance criteria for the fix — on at least one report.** Two or three lines a
+  developer can build against and you can verify afterwards: what must be true when this is
+  done, including the case that fails today. Agreeing that wording before the work starts is
+  half of what this job is; writing it once here shows you can.
 
 **How many?** **Six to ten well-written reports is a complete submission.** We are not
 counting — we are looking at whether the serious ones are in there and whether they are
@@ -59,8 +63,9 @@ the job.
 
 ## D3 — Automated regression suite
 
-The deliverable that outlives you. Playwright is preferred; Cypress, or Playwright in
-Python or Java, are all fine.
+The deliverable that outlives you. **Playwright, Cypress or Selenium**, in TypeScript,
+JavaScript or Python — all three frameworks are in daily use here and the choice is not
+graded. Use the one you are quickest in, and say in your README why you chose it.
 
 **Requirements:**
 
@@ -71,6 +76,15 @@ Python or Java, are all fine.
   and does not say so is a flaky suite
 - Deterministic. No `waitForTimeout(3000)` as a synchronisation strategy
 - Readable. A developer who has never seen it should be able to add a case
+- **Fast enough to run on every push.** State the wall-clock runtime in your README. If it
+  is over five minutes, say what you would parallelise or move down to the API layer
+- **Locators that survive a redesign.** Roles, labels and test ids rather than a chain of
+  `nth-child`. A suite that breaks when a developer moves a `<div>` gets switched off within
+  a month, and then it protects nothing
+- **It runs in CI.** A workflow in `.github/workflows/` that installs, starts the app and
+  runs the suite on every push, with the report kept as an artefact. The app needs Node 24
+  and nothing else, so this is a short file. A suite that only runs on your laptop is a
+  suite the team stops running
 
 **Required coverage — three things.** Anything beyond them is a bonus:
 
@@ -112,6 +126,14 @@ The document you would actually send to the technical lead. Use
 - Coverage gaps and residual risk — what you did not test and what could still bite
 - What you would automate next, and what you would ask the developers to change to make the
   application more testable
+- **A tooling recommendation — half a page.** You are the first QA hire on a team with no
+  automation. Say what you would standardise on and why: which framework, run where, owned
+  by whom. Then answer the question directly — **is a code-first suite right here, or does
+  an AI-driven platform** (Mabl, Testim, Katalon, Tricentis Tosca, Applitools and the like,
+  with their self-healing locators, natural-language authoring and visual comparison)
+  **earn its licence on a project this size?** Either answer is right if the reasoning is.
+  Say what it would cost, what it would save, and what you would still write by hand. We are
+  looking for a position you would defend to a client, not a survey of the market.
 
 This is the document a client-facing lead reads. It is scored as writing as well as
 analysis.
@@ -128,9 +150,14 @@ including a test failing against the unfixed bug.
 
 - **Accessibility checks** — `@axe-core/playwright` on the two main pages, plus the manual
   keyboard findings written up. Cheap, and it usually finds something real.
-- **A CI workflow** (`.github/workflows/`) that runs the suite on push, with the report as
-  an artefact. This is the deliverable that makes the suite matter, and it is the single
-  best use of your remaining time.
+- **A visual check on one page.** Playwright's `toHaveScreenshot`, or an AI comparison tool
+  such as Applitools on its free tier. Rendering defects are the ones assertions miss, and
+  this app has some. Say what it caught and what it flagged that was noise.
+- **One flow built on an AI QA platform** — Mabl, Testim, Katalon or similar, all of which
+  have a trial. Author the same booking flow there, run it, and write two paragraphs: what
+  it did better than your code, what it did worse, and whether the self-healing held up when
+  you changed a selector. This is the best use of your remaining time, because it is the
+  judgement the tooling recommendation rests on.
 - **A performance or load observation** — k6 or autocannon against the availability endpoint,
   with a number, not a feeling.
 - **A cross-browser run** on Chromium, WebKit and Firefox, with the differences noted.

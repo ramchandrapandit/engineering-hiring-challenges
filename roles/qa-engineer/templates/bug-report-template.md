@@ -102,6 +102,15 @@ Where the test that covers this lives, and confirmation that it currently fails.
 - `qa/tests/api/authorisation.spec.ts` → *"a member cannot read another member's booking"*
 - Fails against 2.3.1. Passes once the ownership check is applied.
 
+## Acceptance criteria for the fix
+
+What must be true before this is closed, written so a developer can build against it and you
+can verify it afterwards. Include the case that fails today.
+
+- A member requesting another member's booking reference receives 404, not the record
+- The same request with their own reference still returns it
+- `qa/tests/api/authorisation.spec.ts` goes green without being edited
+
 ## Notes and suggested area
 
 Optional. Where you think it lives, or what you would look at. Do not guess confidently

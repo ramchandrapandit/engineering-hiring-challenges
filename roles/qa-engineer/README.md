@@ -9,7 +9,7 @@ the net that stops it coming back.**
 | **Expected work** | 5–8 hours. Please do not spend more. |
 | **The app** | [`app/`](app/) — runs in one command, no build step |
 | **The spec** | [`app/SPEC.md`](app/SPEC.md) — the source of truth for what is a defect |
-| **Deliverables** | A test plan, bug reports, an automated suite, a summary, and a 2–3 minute video |
+| **Deliverables** | A test plan, bug reports, an automated suite running in CI, a summary, and a 2–3 minute video |
 
 ## Which files do I actually need?
 
@@ -51,7 +51,9 @@ Not "how many bugs did you find". Three things:
 2. **Rigour.** Can a developer reproduce your bug from your report, first read, without
    asking you a question? Do you cite the spec rather than your opinion?
 3. **Leverage.** Does your automated suite actually protect the codebase, or does it assert
-   that a page has a title? A regression test that has never been red proves nothing.
+   that a page has a title? A regression test that has never been red proves nothing, and a
+   suite that only runs on your laptop is one nobody runs by March — which is why the CI
+   workflow is a requirement and not a flourish.
 
 ## What is in the app
 
@@ -85,10 +87,14 @@ So you can calibrate rather than guess. This is a **strong** submission, not a m
   visible in the interface
 - **Nine automated tests**: six API, one concurrency, one UI flow, one that fails and is
   labelled with the bug it covers
-- A `TEST-SUMMARY.md` that ends in a go / no-go recommendation with conditions
+- **A twenty-line CI workflow** that runs those nine tests on push, and has been seen green
+- A `TEST-SUMMARY.md` that ends in a go / no-go recommendation with conditions, and half a
+  page saying what you would standardise this team on — code-first, or one of the AI
+  platforms — and why
 - Nine commits and a three-minute video
 
-**No CI workflow. No load testing. No cross-browser matrix. Eight bugs, not twenty-five.**
+**No load testing. No cross-browser matrix. No AI platform trial. Eight bugs, not
+twenty-five.**
 That submission scores in the eighties. The submissions that score below sixty are almost
 never the ones that found fewer bugs — they are the ones with twenty green UI tests, no
 ranking, and no recommendation.

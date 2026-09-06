@@ -169,7 +169,10 @@ Build it in this order — it is the order of value:
 2. **One concurrency test** asserting what §5 requires. This is the highest-value test in
    the suite
 3. **One end-to-end UI flow** — request a booking, then see it in the office console
-4. *(Bonus, if you are ahead)* API tests for the rules that are currently correct, so a
+4. **The CI workflow.** Twenty lines: check out, Node 24, `npm ci`, start the app, run the
+   suite, upload the report. Push it and watch it go green before you move on — a workflow
+   nobody has run does not count
+5. *(Bonus, if you are ahead)* API tests for the rules that are currently correct, so a
    future change cannot break them silently, and `@axe-core/playwright` on both pages
 
 Keep it readable. Name each test after the behaviour it protects, not the endpoint it calls.
@@ -178,6 +181,12 @@ Keep it readable. Name each test after the behaviour it protects, not the endpoi
 
 Bug reports from your notes, then `TEST-SUMMARY.md`. Rank by severity. Take a position on
 Friday's release.
+
+Finish the summary with the tooling recommendation: what this team should standardise on,
+and whether an AI-driven platform — Mabl, Testim, Katalon, Applitools — earns its licence
+here against a code-first suite. Half a page. If you have twenty spare minutes, open a trial
+and author one flow in it first, because an opinion you have tested is worth five you have
+read.
 
 Write the summary as though it is going to the technical lead and then to the client,
 because in this job it is.
@@ -199,7 +208,9 @@ Use what you know. If you have no preference:
 
 | | |
 |---|---|
-| **Automation** | Playwright — one tool for UI and API, and its trace viewer is excellent evidence for a bug report |
+| **Automation** | Playwright, Cypress or Selenium — all three are used here. Playwright if you have no preference: one tool for UI and API, and its trace viewer is excellent evidence for a bug report |
+| **CI** | GitHub Actions. `actions/setup-node@v4` with Node 24, then your command. There is no database service to stand up |
+| **AI QA platforms** | Mabl, Testim, Katalon and Applitools all have trials. Optional, and only once the must-haves are done — but it is the fastest way to have a real opinion for your tooling note |
 | **API by hand** | `curl` + `jq`, Postman, Bruno, HTTPie, or the VS Code REST client |
 | **Accessibility** | axe DevTools browser extension, then `@axe-core/playwright` |
 | **Load** | k6 or autocannon, if you get that far |
