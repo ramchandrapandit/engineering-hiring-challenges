@@ -136,11 +136,11 @@ Build it in this order — it is the order of value:
 
 1. **API tests for the defects you found.** Fast, stable, and each one is a regression test.
    Check each **fails** against the app as shipped
-2. **API tests for the rules that are currently correct**, so a future change cannot break
-   them silently
-3. **One or two end-to-end UI flows** — request a booking, and a staff flow
-4. **A concurrency test** asserting what §5 requires
-5. **`@axe-core/playwright`** on both pages
+2. **One concurrency test** asserting what §5 requires. This is the highest-value test in
+   the suite
+3. **One end-to-end UI flow** — request a booking, then see it in the office console
+4. *(Bonus, if you are ahead)* API tests for the rules that are currently correct, so a
+   future change cannot break them silently, and `@axe-core/playwright` on both pages
 
 Keep it readable. Name each test after the behaviour it protects, not the endpoint it calls.
 
