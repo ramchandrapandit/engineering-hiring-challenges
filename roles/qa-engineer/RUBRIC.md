@@ -51,7 +51,8 @@ finding a lot.
 | Expected result cited to a `SPEC.md` section, not to your opinion | 2 |
 | Real evidence — payload, number, screenshot, log line | 2 |
 | Severity and priority as two judgements, with reasoning | 2 |
-| Impact stated in the client's language, not only the mechanism | 2 |
+| Impact stated in the client's language, not only the mechanism | 1 |
+| Acceptance criteria for the fix, on at least one report | 1 |
 
 **Ranking — 3.** Is the most serious thing at the top? Would a lead reading only the first
 three findings know the worst of it?
