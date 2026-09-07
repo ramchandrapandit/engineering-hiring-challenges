@@ -1,7 +1,7 @@
 # FAQ
 
 Read this before emailing. If your question is not here, email
-**025pathaksandesh@gmail.com** with `[Challenge Question]` in the subject and we answer
+**sandesh.pathak@nevasce.com** with `[Challenge Question]` in the subject and we answer
 within one working day. Asking a good clarifying question is a point in your favour.
 
 ---

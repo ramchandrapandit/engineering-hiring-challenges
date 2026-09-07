@@ -129,7 +129,7 @@ Full detail is in [`SUBMISSION.md`](SUBMISSION.md). The short version:
 4. Record a **2–3 minute** video walkthrough and get a shareable link.
 5. Export a zip of your repository named exactly `FirstName_LastName.zip`.
 6. Email the zip, the GitHub link and the video link to
-   **025pathaksandesh@gmail.com** with the subject line
+   **sandesh.pathak@nevasce.com** with the subject line
    `Full-Stack Challenge — FirstName LastName` or `QA Challenge — FirstName LastName`.
 
 Both the zip **and** the GitHub link are required. The zip is what we archive; the GitHub
@@ -163,7 +163,7 @@ To save you from optimising for the wrong thing:
 ## Questions
 
 Open an issue on your own fork and tag it `question`, or email
-**025pathaksandesh@gmail.com** with `[Challenge Question]` in the subject line. We answer
+**sandesh.pathak@nevasce.com** with `[Challenge Question]` in the subject line. We answer
 within one working day, and asking a good clarifying question is a point in your favour,
 not against you.
 

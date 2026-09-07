@@ -127,7 +127,7 @@ delete half your project to make it fit.
 
 ## 7. Send the email
 
-**To:** 025pathaksandesh@gmail.com
+**To:** sandesh.pathak@nevasce.com
 
 **Subject (copy one of these exactly):**
 

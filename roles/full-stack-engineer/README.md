@@ -96,7 +96,7 @@ refund worked.
 ## Submitting
 
 Follow [`../../SUBMISSION.md`](../../SUBMISSION.md) exactly. Zip named
-`FirstName_LastName.zip`, GitHub link, video link, to **025pathaksandesh@gmail.com**.
+`FirstName_LastName.zip`, GitHub link, video link, to **sandesh.pathak@nevasce.com**.
 
 ## If you get stuck
 

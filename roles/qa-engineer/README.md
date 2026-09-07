@@ -108,7 +108,7 @@ ranking, and no recommendation.
 ## Submitting
 
 Follow [`../../SUBMISSION.md`](../../SUBMISSION.md). Zip named `FirstName_LastName.zip`,
-GitHub link, video link, to **025pathaksandesh@gmail.com** with the subject
+GitHub link, video link, to **sandesh.pathak@nevasce.com** with the subject
 `QA Challenge — FirstName LastName`.
 
 ## A word on scope
