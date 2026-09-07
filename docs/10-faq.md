@@ -18,7 +18,7 @@ have.
 No. Never. Nothing in this exercise touches a client system, and we do not take code from
 it. The reference app is fictional and the specs were written for hiring.
 
-### 24 hours from when, exactly?
+### 48 hours from when, exactly?
 
 From the timestamp on the email that sent you this repository link. If you open it at 9pm on
 a Friday and would rather start Saturday morning, just reply and say so — we will restart

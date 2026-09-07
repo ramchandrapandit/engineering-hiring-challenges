@@ -5,7 +5,7 @@
 | Stage | What it is | How long | When |
 |---|---|---|---|
 | 1. Application | CV / GitHub / a paragraph about you | — | done |
-| 2. **This challenge** | 5–8 hours of work, 24-hour window | 1 day | you are here |
+| 2. **This challenge** | 5–8 hours of work, 48-hour window | 2 days | you are here |
 | 3. **Review** | Two of us read it independently against the published rubric, then compare | 3 working days | we come back to you either way |
 | 4. **The round** | One ~60-minute call: code walkthrough, then behavioural | 1 hour | scheduled in your timezone |
 | 5. **Decision** | Yes, or a specific no | 2 working days | — |

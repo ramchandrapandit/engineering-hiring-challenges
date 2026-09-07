@@ -5,7 +5,7 @@ under Docker.
 
 | | |
 |---|---|
-| **Clock** | 24 hours from the email that sent you this link |
+| **Clock** | 48 hours from the email that sent you this link |
 | **Expected work** | 5–8 hours. Please do not spend more. |
 | **Stack** | Your choice, within the constraints in [`../../docs/08-node-and-tooling.md`](../../docs/08-node-and-tooling.md) |
 | **Deliverables** | A repository, a `FirstName_LastName.zip`, and a 2–3 minute video |

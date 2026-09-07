@@ -18,12 +18,12 @@ hired for first, and tell us in your email that the second one is a bonus.
 
 ---
 
-## The 24-hour rule
+## The 48-hour rule
 
-**You have 24 hours from the moment we email you the link to this repository.**
+**You have 48 hours from the moment we email you the link to this repository.**
 
 That is a deadline, not a workload. We expect somewhere between **5 and 8 hours of actual
-work**. The rest of the day is so you can sleep, go to your current job, and think about it
+work**. The rest of the time is so you can sleep, go to your current job, and think about it
 away from the keyboard. Nobody here wants you to pull an all-nighter — we can tell when
 somebody did, and it does not score better.
 
@@ -33,7 +33,7 @@ properly. Then decide, deliberately, what to do next with the time you have left
 write that decision down in your README. We would much rather read "I stopped here, and
 here is why" than find four features that are each 70% finished.
 
-If 24 hours genuinely does not work for you — a family thing, a deadline at your current
+If 48 hours genuinely does not work for you — a family thing, a deadline at your current
 job, a visa appointment — reply to the email and ask for more time **before** the clock runs
 out. We have never said no to somebody who asked in advance. We do notice when somebody
 goes silent and submits late.

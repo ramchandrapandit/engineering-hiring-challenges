@@ -5,7 +5,7 @@ the net that stops it coming back.**
 
 | | |
 |---|---|
-| **Clock** | 24 hours from the email that sent you this link |
+| **Clock** | 48 hours from the email that sent you this link |
 | **Expected work** | 5–8 hours. Please do not spend more. |
 | **The app** | [`app/`](app/) — runs in one command, no build step |
 | **The spec** | [`app/SPEC.md`](app/SPEC.md) — the source of truth for what is a defect |

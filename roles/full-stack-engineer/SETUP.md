@@ -1,6 +1,6 @@
 # Setup — a suggested path through the day
 
-You do not have to follow this. It is here because "5–8 hours, 24-hour clock" punishes a
+You do not have to follow this. It is here because "5–8 hours, 48-hour clock" punishes a
 bad order of operations more than it punishes a slow typist, and the order below is the one
 we would use ourselves.
 
