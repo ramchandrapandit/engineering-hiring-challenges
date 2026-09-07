@@ -11,6 +11,10 @@ the net that stops it coming back.**
 | **The spec** | [`app/SPEC.md`](app/SPEC.md) — the source of truth for what is a defect |
 | **Deliverables** | A test plan, bug reports, an automated suite running in CI, a summary, and a 2–3 minute video |
 
+> **Were you sent to [`SCREEN.md`](SCREEN.md)?** Then that is your brief and it replaces
+> this one. It is a shorter version of the same exercise — about four hours instead of
+> eight — and it overrides everything below.
+
 ## Which files do I actually need?
 
 **Five files, then start testing.** Everything else is reference.
