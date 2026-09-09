@@ -9,8 +9,8 @@ test('rejected booking should have deposit released or refunded', async ({ reque
     'http://localhost:4000/api/auth/login',
     {
       data: {
-        email: 'other@himalayacc.example',
-        password: 'other12345'
+        email: process.env.MEMBER_B_EMAIL,
+        password: process.env.MEMBER_B_PASSWORD
       }
     }
   );
@@ -65,8 +65,8 @@ test('rejected booking should have deposit released or refunded', async ({ reque
     'http://localhost:4000/api/auth/login',
     {
       data: {
-        email: 'staff@himalayacc.example',
-        password: 'staff12345'
+        email: process.env.STAFF_EMAIL,
+        password: process.env.STAFF_PASSWORD
       }
     }
   );

@@ -7,8 +7,8 @@ test('booking with a past event date should be rejected', async ({ request }) =>
     'http://localhost:4000/api/auth/login',
     {
       data: {
-        email: 'other@himalayacc.example',
-        password: 'other12345'
+        email: process.env.MEMBER_B_EMAIL,
+        password: process.env.MEMBER_B_PASSWORD
       }
     }
   );

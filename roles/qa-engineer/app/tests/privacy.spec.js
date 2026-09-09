@@ -7,8 +7,8 @@ test('member cannot access another member private booking data', async ({ reques
     'http://localhost:4000/api/auth/login',
     {
       data: {
-        email: 'other@himalayacc.example',
-        password: 'other12345'
+        email: process.env.MEMBER_B_EMAIL,
+        password: process.env.MEMBER_B_PASSWORD
       }
     }
   );

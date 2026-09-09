@@ -6,8 +6,8 @@ test('only one simultaneous booking should succeed', async ({ request }) => {
     'http://localhost:4000/api/auth/login',
     {
       data: {
-        email: 'other@himalayacc.example',
-        password: 'other12345'
+        email: process.env.MEMBER_A_EMAIL,
+        password: process.env.MEMBER_A_PASSWORD
       }
     }
   );
@@ -23,8 +23,8 @@ test('only one simultaneous booking should succeed', async ({ request }) => {
     'http://localhost:4000/api/auth/login',
     {
       data: {
-        email: 'member@himalayacc.example',
-        password: 'member12345'
+        email: process.env.MEMBER_B_EMAIL,
+        password: process.env.MEMBER_B_PASSWORD
       }
     }
   );
@@ -38,7 +38,7 @@ test('only one simultaneous booking should succeed', async ({ request }) => {
   // Same slot for both members
   const bookingData = {
     spaceSlug: 'main-hall',
-    eventDate: '2026-11-25',
+    eventDate: '2026-11-27',
     startTime: '10:00',
     endTime: '11:00',
     attendees: 10,
