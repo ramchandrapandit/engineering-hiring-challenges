@@ -1,0 +1,123 @@
+BUG-007 — Simultaneous bookings can both succeed for the same slot
+Field-------Value
+Severity ->	Critical
+Priority -> P1
+Area ->	Booking request
+Found -> Concurrency
+Spec reference -> SPEC.md § Requesting a booking / concurrency
+Status ->	Open
+
+Summary
+Two members requesting the same space and time slot at the same moment can both successfully create bookings. This violates the critical concurrency requirement that exactly one request must succeed when two members attempt to book the same slot simultaneously.
+
+The specification explicitly states that two members requesting the same slot at the same moment must not both succeed and that exactly one request gets the slot.
+
+Environment
+Build: Sabhaghar Booking 2.3.1
+Running via: npm start, port 4000
+Data state: Current challenge data
+Browser: Not applicable — issue reproduced through API automation
+Account used: Two authenticated member accounts
+API testing: Performed using Playwright
+Automation: Playwright 1.63.0
+Steps to reproduce
+Authenticate as Member A using POST /api/auth/login.
+Authenticate as Member B using POST /api/auth/login.
+Select the same available space, event date, start time, and end time for both members.
+Send both POST /api/bookings requests simultaneously using Playwright Promise.all().
+Capture the HTTP response status from both requests.
+Observe that both requests return 201 Created.
+Expected result
+
+According to SPEC.md, when two members request the same space and time slot at the same moment:
+
+Exactly one request should succeed with 201 Created.
+The other request should be rejected with 409 Conflict.
+Two bookings must not be created for the same slot.
+
+The specification identifies this as the single most important rule for booking concurrency.
+
+Actual result
+
+Both simultaneous booking requests successfully created bookings.
+
+The Playwright test produced:
+
+Member A status: 201
+Member B status: 201
+
+Expected: 1
+Received: 2
+
+Therefore, both members were able to book the same space and time slot simultaneously.
+
+Impact
+
+The system can create duplicate bookings for the same space and time.
+
+This can result in:
+
+Double booking of the same resource.
+An incorrect booking schedule.
+Conflicting commitments for members.
+Operational problems for staff managing the venue.
+
+Because the specification identifies concurrency protection as the single most important booking rule, this is classified as Critical / P1.
+
+Evidence
+
+Evidence from Playwright terminal output:
+
+Member A status: 201
+Member B status: 201
+
+Error: expect(received).toBe(expected)
+
+Expected: 1
+Received: 2
+
+Screenshot:
+
+app/Evidence/BUG-007
+
+Automated test:
+
+app/tests/concurrency.spec.js
+
+Test name:
+
+only one simultaneous booking should succeed
+
+Regression test
+
+Implemented in Playwright:
+
+Send two authenticated booking requests simultaneously for the same space/date/time.
+Verify that exactly one request returns 201.
+Verify that exactly one request returns 409.
+Verify that two bookings are not created for the same slot.
+
+Current test:
+
+app/tests/concurrency.spec.js
+
+Acceptance criteria for the fix
+Two simultaneous requests for the same space and time slot must not both succeed.
+Exactly one request must return 201 Created.
+The other request must return 409 Conflict.
+Only one booking must be created for the requested slot.
+The conflicting request should identify the booking that caused the conflict, as required by the specification.
+The Playwright concurrency regression test must pass after the defect is fixed.
+Notes and suggested area
+
+The issue appears to be related to concurrency handling during booking creation.
+
+The defect was reproduced through API automation by sending two authenticated POST /api/bookings requests simultaneously using Promise.all().
+
+The application currently allows both requests to receive 201 Created, indicating that the booking slot is not being protected correctly when simultaneous requests are processed.
+
+Open question
+
+The concurrency defect is confirmed through API testing.
+
+The implementation should be investigated to determine why simultaneous requests can both successfully claim the same booking slot and ensure that the slot is protected against concurrent booking creation.

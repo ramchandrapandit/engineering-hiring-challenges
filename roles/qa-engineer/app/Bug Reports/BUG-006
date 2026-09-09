@@ -1,0 +1,119 @@
+# BUG-006 — Rejected booking keeps deposit in held status
+
+**Severity:** High
+**Priority:** P1
+**Area:** Booking request
+**Found:** Exploratory + API testing
+**Spec reference:** `SPEC.md` — Staff rejection / deposit handling
+**Status:** Open
+
+## Summary
+
+When a Staff member rejects a pending booking, the booking status changes to **Rejected**, but the deposit remains in **Held** status instead of being refunded.
+
+## Environment
+
+* Application: Sabhaghar Booking
+* Environment: Local
+* Browser: Chrome
+* OS: Windows
+* User role: Staff
+* Testing type: Manual / Exploratory
+* Application URL: `http://localhost:4000/`
+
+## Steps to Reproduce
+
+1. Log in as a Staff user.
+2. Navigate to the Staff booking console.
+3. Find a booking with status **Pending**.
+4. Click **Reject**.
+5. Check the booking status.
+6. Check the deposit status.
+
+## Expected Result
+
+The booking status should change from:
+
+`Pending → Rejected`
+
+The deposit should be changed from:
+
+`Held → Refunded`
+
+## Actual Result
+
+The booking status changes correctly to **Rejected**.
+
+However, the deposit remains **Held** instead of being refunded.
+
+## Impact
+
+A rejected booking retains a held deposit even though the booking is no longer active.
+
+This can result in incorrect financial/booking records and may prevent the member's deposit from being released as required.
+
+## Evidence
+
+Observed during manual testing:
+
+* Booking status: **Rejected**
+* Deposit status: **Held**
+* Expected deposit status: **Refunded**
+
+
+app/Evidence/BUG-006
+
+API Testing result:
+Booking creation status: 201
+Booking creation response: {"reference":"HCC-BK-4307","status":"pending","hours":1,"total":182.5,"deposit":500,"message":"Your request has been sent to the office. You will hear back within two working days."}
+Booking reference: HCC-BK-4307
+Reject status: 200
+Reject response: {"reference":"HCC-BK-4307","status":"rejected"}
+My bookings status: 200
+Rejected booking: {
+  reference: 'HCC-BK-4307',
+  space: 'Sabhaghar — Main Hall',
+  date: '2026-12-27',
+  start: '13:00',
+  end: '14:00',
+  attendees: 10,
+  purpose: 'Deposit Rejection Test',
+  visibility: 'public',
+  status: 'rejected',
+  deposit: { amount: 500, status: 'held' }
+}
+  ✘  1 …js:3:1 › rejected booking should have deposit released or refunded (970ms)
+
+  1) app\tests\rejected-booking-deposit.spec.js:3:1 › rejected booking should have deposit released or refunded 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /refunded|released/
+    Received string:  "held"
+
+## Regression Test
+
+1. Create a valid booking as a member.
+2. Verify it starts with status **Pending** and deposit **Held**.
+3. Log in as Staff.
+4. Reject the booking.
+5. Verify status is **Rejected**.
+6. Verify deposit status is **Refunded**.
+
+## Acceptance Criteria for Fix
+
+* Staff rejection changes the booking status to **Rejected**.
+* The deposit status changes from **Held** to **Refunded**.
+* A rejected booking must not retain a held deposit.
+* The refund/release action should occur only once.
+* The member should be able to see the updated deposit status.
+
+## Notes and Suggested Area
+
+**Suggested area:** Staff rejection workflow / deposit status handling.
+
+The rejection workflow should update both the booking status and the associated deposit status.
+
+## Open Question
+
+The specification states that rejected bookings have their deposit status **refunded**. The exact UI wording for the refund/release operation can be confirmed during API testing.

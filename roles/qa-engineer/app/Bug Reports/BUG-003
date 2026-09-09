@@ -1,0 +1,87 @@
+# BUG-003 — Booking can be created for more than 12 hours
+
+**Severity:** High
+**Priority:** P1
+**Area:** Booking request
+**Found:** Exploratory
+**Spec reference:** `SPEC.md` — Booking request / duration validation
+**Status:** Open
+
+## Summary
+
+A member can successfully create a booking with a duration greater than the maximum allowed **12 hours**.
+
+## Environment
+
+* Application: Sabhaghar Booking
+* Environment: Local
+* Browser: Chrome
+* OS: Windows
+* User role: Member
+* Testing type: Manual / Exploratory
+* Application URL: `http://localhost:4000/`
+
+## Steps to Reproduce
+
+1. Sign in using a valid member account.
+2. Navigate to the booking request page.
+3. Select **Main Hall**.
+4. Select a future date.
+5. Set the start time to **09:00**.
+6. Set the end time to **21:30**.
+7. Enter **10** attendees.
+8. Enter `Test Event` as the purpose.
+9. Select **Public** visibility.
+10. Submit the booking.
+
+## Expected Result
+
+The booking should be rejected because the duration is **12.5 hours**, which exceeds the specified maximum of **12 hours**.
+
+A validation error should be displayed and no booking should be created.
+
+## Actual Result
+
+The application successfully created the booking for **12.5 hours**.
+
+## Impact
+
+Members can create bookings outside the permitted booking duration. This can result in invalid booking records and may affect scheduling, availability, pricing, and staff approval workflows.
+
+## Evidence
+
+The booking was successfully created using:
+
+* Start: 09:00
+* End: 21:30
+* Duration: 12.5 hours
+* Attendees: 10
+* Space: Main Hall
+
+check evidence as screenshot in path:app/Evidence/BUG-003
+
+## Regression Test
+
+Attempt to create bookings with:
+
+* **12 hours** → should be accepted.
+* **12 hours 30 minutes** → should be rejected.
+* **13 hours** → should be rejected.
+
+## Acceptance Criteria for Fix
+
+* Bookings of exactly 12 hours can be created.
+* Bookings exceeding 12 hours are rejected.
+* The UI displays an appropriate validation message.
+* The backend also rejects durations greater than 12 hours.
+* No booking record is created when the duration exceeds 12 hours.
+
+## Notes and Suggested Area
+
+**Suggested area:** Booking duration validation.
+
+Validation should be enforced server-side so that the 12-hour limit cannot be bypassed through direct API requests.
+
+## Open Question
+
+None. The specification clearly defines **12 hours as the maximum booking duration**.

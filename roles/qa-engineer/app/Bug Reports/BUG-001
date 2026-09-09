@@ -1,0 +1,82 @@
+# BUG-001 — Private event exposes member name on public calendar
+
+| Field              | Value                                    |
+| ------------------ | ---------------------------------------- |
+| **Severity**       | High                                     |
+| **Priority**       | P1                                       |
+| **Area**           | Public calendar                          |
+| **Found**          | Exploratory                              |
+| **Spec reference** | `SPEC.md` § Public calendar / visibility |
+| **Status**         | Open                                     |
+
+## Summary
+
+A private event displayed in the public **What's On** calendar exposes the member's name. This violates the privacy requirement for private events, which should not identify the member.
+
+## Environment
+
+* **Build:** Sabhaghar Booking 2.3.1
+* **Running via:** `npm start`, port 4000
+* **Data state:** Current challenge data
+* **Browser:** Chrome
+* **Account used:** Visitor / public calendar
+* **API testing:** Not performed yet
+
+## Steps to reproduce
+
+1. Open the Sabhaghar Booking application.
+2. Navigate to the **What's On** / public calendar.
+3. Find a booking marked as **Private**.
+4. Open or view the private event.
+5. Observe the information displayed for the event.
+
+## Expected result
+
+According to `SPEC.md`, a private event should display only:
+
+* **"Private event"**
+* Space name
+* Date
+* Time
+
+The member's identifying information and event purpose must not be exposed.
+
+## Actual result
+
+The private event displays the **member's name**, along with the space name, booked date/time, and event type.
+
+## Impact
+
+A visitor can identify the member who created a private event through the public calendar. This violates the privacy expectation of the private-event visibility option and may expose information the member intended to keep private.
+
+## Evidence
+
+check evidence as screenshot in path:app/Evidence/BUG-001
+
+## Regression test
+
+To be implemented in Playwright:
+
+* Verify that private events do not display the member's name.
+* Verify that private events display only the information permitted by the specification.
+* Verify that public events continue to display their permitted information.
+
+## Acceptance criteria for the fix
+
+* Private events display **"Private event"**, space, date and time.
+* Member name is not displayed for private events.
+* Member email is not displayed for private events.
+* Member ID is not exposed.
+* Private event purpose is not displayed.
+* The calendar API does not return identifying member information for private events.
+* Public events continue to display the information allowed by the specification.
+
+## Notes and suggested area
+
+The issue appears to be related to **public calendar privacy handling**.
+
+The UI behavior has been verified manually. API behavior has not yet been tested, so it should be checked separately to determine whether the identifying information is also present in the API response.
+
+## Open question
+
+The UI defect is confirmed because the member's name is visible for a private event. API behavior has not yet been verified and will be tested during the API-testing phase.

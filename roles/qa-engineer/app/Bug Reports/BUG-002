@@ -1,0 +1,111 @@
+# BUG-002 — Past-date booking can be created
+
+**Severity:** High
+**Priority:** P1
+**Area:** Booking request
+**Found:** Exploratory + API Testing
+**Spec reference:** `SPEC.md` — Booking request / event date validation
+**Status:** Open
+
+## Summary
+
+A signed-in member can successfully create a booking using an **event date in the past**.
+
+The specification requires `eventDate` to be a future date, and bookings for past dates must be rejected with HTTP `422`.
+
+## Environment
+
+* Application: Sabhaghar Booking
+* Environment: Local
+* Browser: Chrome
+* OS: Windows
+* User role: Member
+* Testing type: Manual / Exploratory
+* Application URL: `http://localhost:4000/`
+
+## Steps to Reproduce
+
+1. Open the Sabhaghar Booking application.
+2. Sign in using a valid member account.
+3. Navigate to the booking request page.
+4. Select a bookable space, such as **Main Hall**.
+5. Select a date that is already in the past.
+6. Enter valid start and end times.
+7. Enter a valid number of attendees.
+8. Enter the event purpose.
+9. Select the required visibility.
+10. Submit the booking request.
+
+## Expected Result
+
+The application should reject the booking because the selected event date is in the past.
+
+The booking should **not be created**, and the application should return/display an appropriate validation error. According to the specification, a past `eventDate` should be rejected with **HTTP 422**.
+
+## Actual Result
+
+The application successfully creates the booking even though the selected event date is in the past.
+
+The booking is accepted and appears to be created as a valid booking request.
+
+## Impact
+
+Allowing bookings for past dates can result in invalid booking records and inconsistent booking data.
+
+It may also affect:
+
+* Staff booking management
+* Calendar information
+* Booking statistics
+* Reporting/export data
+* Business workflows based on event dates
+
+## Evidence
+
+app/Evidence/BUG-002
+
+Api Testing Results:
+ ✘  1 …ng.spec.js:3:1 › booking with a past event date should be rejected (744ms)Booking status: 201
+Response: {"reference":"HCC-BK-4303","status":"pending","hours":1,"total":182.5,"deposit":500,"message":"Your request has been sent to the office. You will hear back within two working days."}
+
+
+  1) app\tests\past-date-booking.spec.js:3:1 › booking with a past event date should be rejected 
+
+    Expected: 422
+    Received: 201
+
+
+## Regression Test
+
+**Test:** Verify that a member cannot create a booking for a past date.
+
+**Steps:**
+
+1. Sign in as a member.
+2. Open the booking request form.
+3. Select a date before today's date.
+4. Enter otherwise valid booking details.
+5. Submit the request.
+
+**Expected:** Booking is rejected with a validation error and no booking record is created.
+
+## Acceptance Criteria for Fix
+
+* Past event dates cannot be submitted successfully.
+* The booking request is rejected with HTTP `422` when tested through the API.
+* No booking record is created for an invalid past date.
+* The UI displays a clear validation message to the member.
+* Future dates continue to work normally.
+* The validation is enforced server-side and is not dependent only on the browser UI.
+
+## Notes and Suggested Area
+
+**Suggested area:** Booking date validation / booking API.
+
+The date validation should be enforced on the backend so that invalid dates cannot be submitted by bypassing the UI.
+
+## Open Question
+
+Should the application allow bookings for **today**, or must the event date always be strictly after the current date?
+
+The specification states that `eventDate` must be **in the future**, so this should be confirmed if the product team has a different interpretation.

@@ -1,0 +1,109 @@
+# BUG-004 — Touching bookings are incorrectly rejected
+
+**Severity:** Medium
+**Priority:** P2
+**Area:** Booking request
+**Found:** Exploratory
+**Spec reference:** `SPEC.md` — Booking request / overlapping bookings
+**Status:** Open
+
+## Summary
+
+The application incorrectly rejects a booking when its start time exactly matches the end time of an existing booking for the same space and date.
+
+According to the specification, **touching booking times do not conflict**.
+
+## Environment
+
+* Application: Sabhaghar Booking
+* Environment: Local
+* Browser: Chrome
+* OS: Windows
+* User role: Member
+* Testing type: Manual / Exploratory
+* Application URL: `http://localhost:4000/`
+
+## Steps to Reproduce
+
+1. Sign in using a valid member account.
+2. Create or use an existing booking for **Main Hall**.
+3. Set the existing booking time to **13:00–14:00**.
+4. Create another booking for the **same Main Hall and same date**.
+5. Set the second booking time to **14:00–15:00**.
+6. Enter valid attendee and event information.
+7. Submit the second booking.
+
+## Expected Result
+
+The second booking should be accepted because the two bookings only **touch at 14:00** and do not overlap.
+
+Example:
+
+```text
+Booking 1: 13:00 ───────── 14:00
+                           |
+Booking 2:                 14:00 ───────── 15:00
+```
+
+The specification states that touching times do not conflict.
+
+## Actual Result
+
+The application rejects the second booking and displays:
+
+**"Time is already taken."**
+
+## Impact
+
+Members cannot book a valid time slot immediately after another booking ends.
+
+This can unnecessarily reduce room availability and prevent legitimate back-to-back bookings.
+
+## Evidence
+
+The following test was performed:
+
+* Space: Main Hall
+* Existing booking: 10:00–12:00
+* New booking: 12:00–14:00
+* Result: Booking rejected
+* Message: **"Time is already taken."**
+
+check evidence as screenshot in path:app/Evidence/BUG-004
+
+## Regression Test
+
+Verify the following scenarios:
+
+1. Existing booking: 10:00–12:00
+   New booking: 11:00–13:00
+   **Expected: Rejected**
+
+2. Existing booking: 10:00–12:00
+   New booking: 12:00–14:00
+   **Expected: Accepted**
+
+3. Existing booking: 10:00–12:00
+   New booking: 12:00–12:30
+   **Expected: Accepted**
+
+## Acceptance Criteria for Fix
+
+* Overlapping bookings continue to be rejected.
+* A booking starting exactly when another booking ends is accepted.
+* Back-to-back bookings can be created for the same space.
+* The same behavior is enforced by the backend/API.
+* No regression is introduced to genuine overlapping-booking validation.
+
+## Notes and Suggested Area
+
+**Suggested area:** Booking availability / time-overlap validation.
+
+The overlap calculation should distinguish between:
+
+* **Actual overlap** → reject
+* **Touching boundaries** → allow
+
+## Open Question
+
+None. The specification explicitly states that **touching times do not conflict**.

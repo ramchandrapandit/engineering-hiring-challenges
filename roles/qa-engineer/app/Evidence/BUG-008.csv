@@ -1,0 +1,10 @@
+reference,date,start,end,space,member,email,attendees,purpose,status,deposit
+HCC-BK-4302,2026-11-25,10:00,11:00,Sabhaghar — Main Hall,Test Member,member@himalayacc.example,10,Concurrency Test,pending,500
+HCC-BK-4300,2026-11-20,10:00,10:30,Sabhaghar — Main Hall,Other Member,other@himalayacc.example,10,Playwright API Test,pending,500
+HCC-BK-4299,2026-11-14,10:00,14:00,Sabhaghar — Main Hall,Other Member,other@himalayacc.example,40,Community meeting,pending,500
+HCC-BK-4254,2026-10-11,11:00,13:00,Sabhaghar — Main Hall,Prakash Sapkota,prakash.sapkota53@example.com,99,Dashain gathering,pending,500
+HCC-BK-4247,2026-10-06,11:00,12:00,Sabhaghar — Main Hall,Prakash Oli,prakash.oli46@example.com,9,Yoga session,pending,500
+HCC-BK-4249,2026-10-02,18:00,22:00,Sabhaghar — Main Hall,Gita Rai,gita.rai48@example.com,78,Pasni ceremony,pending,500
+HCC-BK-4294,2026-09-16,10:00,12:00,Sabhaghar — Main Hall,Front Desk Staff,staff@himalayacc.example,40,Community meeting,pending,500
+HCC-BK-4224,2026-09-14,13:00,14:00,Sabhaghar — Main Hall,Bijay Tuladhar,bijay.tuladhar23@example.com,90,Memorial service,pending,500
+HCC-BK-4303,2026-09-08,10:00,11:00,Sabhaghar — Main Hall,Other Member,other@himalayacc.example,10,Past Date Test,pending,500

@@ -1,0 +1,88 @@
+BUG-008 — CSV export missing UTF-8 BOM
+
+Bug ID: BUG-008
+Title: CSV export is missing the required UTF-8 Byte Order Mark (BOM)
+Severity: Medium
+Priority: P2
+Area : Exporting and checking CSV file
+Testing: Manual
+Status: Open
+Environment: Local application — http://localhost:4000
+Module: Staff Booking / CSV Export
+Type: Functional / Data Interoperability
+
+Preconditions
+User is authenticated as a Staff user.
+At least one booking exists in the system.
+Staff CSV export is accessible.
+Steps to Reproduce
+Log in to the application as a Staff user.
+Navigate to the Staff bookings section.
+Export the bookings using the CSV export option.
+Open the downloaded CSV file in a hex/byte viewer or inspect the response body.
+Check the first three bytes of the file.
+Test Data
+
+Expected UTF-8 BOM:
+
+EF BB BF
+Expected Result
+
+The CSV file should begin with the UTF-8 BOM:
+
+EF BB BF
+
+This is required by SPEC.md §6.5 so that UTF-8 content, including Devanagari member names, is correctly recognized by spreadsheet applications such as Excel.
+
+Actual Result
+
+The CSV file starts directly with the CSV header rather than the required BOM.
+
+Example:
+
+72 65 66 ...
+
+where:
+
+72 = r
+65 = e
+66 = f
+
+Therefore, the required UTF-8 BOM:
+
+EF BB BF
+
+is missing.
+
+Impact
+
+CSV consumers may incorrectly detect the file encoding. This can result in Unicode characters, such as Devanagari member names, being displayed incorrectly when the file is opened in spreadsheet applications.
+
+Evidence
+
+The exported CSV was inspected at the byte level.
+
+Observed first bytes:
+
+72 65 66
+
+Expected first bytes:
+
+EF BB BF
+Specification Reference
+
+app/SPEC.md §6.5 — CSV Export
+
+The specification requires the CSV export to be UTF-8 with a byte-order mark.
+
+Suggested Fix
+
+Generate the CSV response with the UTF-8 BOM before the CSV header:
+
+EF BB BF
+
+The fix should also be regression-tested to ensure future CSV exports continue to contain the required BOM.
+
+Risk
+
+Medium — The booking data itself is not lost, but Unicode data may not be interpreted correctly by some CSV consumers, affecting data usability and interoperability.

@@ -1,0 +1,159 @@
+# BUG-005 — Private booking details are exposed through the public calendar
+
+**Bug ID:** BUG-005  
+**Severity:** Critical  
+**Priority:** P1  
+**Area:** Data / Public Calendar  
+**Found By:** Exploratory Testing + API Automation  
+**Status:** Open  
+**Environment:** Local — http://localhost:4000  
+**Application Version:** Sabhaghar Booking v2.3.1  
+**API:** GET /api/calendar  
+**Automation:** Playwright 1.63.0  
+
+## Requirement Reference
+
+**Functional Specification — Public Calendar / Private Calendar Data**
+
+The specification requires private booking information to remain private and not be exposed through the public calendar.
+
+## Preconditions
+
+1. Application is running on `http://localhost:4000`.
+2. The system contains bookings with `visibility = "private"`.
+3. Public calendar is accessible without member authorization.
+
+## Steps to Reproduce
+
+1. Open the Sabhaghar Booking application.
+2. Navigate to the public **What's On / Calendar** section.
+3. Send `GET /api/calendar`.
+4. Inspect the `events` array in the response.
+5. Filter records where `visibility === "private"`.
+
+## Expected Result
+
+Private bookings must not be exposed through the public calendar.
+
+The public calendar should not return private member names, event titles/purposes, private booking details, or other restricted information.
+
+**Expected number of private events exposed: 0**
+
+## Actual Result
+
+The API returns private bookings in the public calendar response.
+
+**Playwright result:**
+
+```text
+Private events exposed: 20
+Expected: 0
+Received: 20
+```
+
+Example:
+
+```text
+Reference: HCC-BK-4228
+Title: Private event
+Purpose: Dashain gathering
+Booked By: Puja Pandey
+Visibility: private
+Status: completed
+Attendees: 109
+```
+
+Another example:
+
+```text
+Reference: HCC-BK-4273
+Title: Private event
+Purpose: दशैं कार्यक्रम
+Booked By: सुष्मिता श्रेष्ठ
+Visibility: private
+Status: confirmed
+Attendees: 310
+```
+
+## Impact
+
+A visitor or member can obtain information about another member's private event through a public endpoint. This exposes member and event information that should remain restricted.
+
+This crosses the application's privacy boundary, therefore the defect is classified as **Critical / P1**.
+
+## Automated Evidence
+
+**Test file:**
+
+```text
+app/tests/calendar-privacy.spec.js
+```
+
+**Test:**
+
+```js
+import { test, expect } from '@playwright/test';
+
+test('public calendar should not expose private booking details', async ({ request }) => {
+  const response = await request.get(
+    'http://localhost:4000/api/calendar'
+  );
+
+  expect(response.status()).toBe(200);
+
+  const data = await response.json();
+
+  const events = data.events;
+
+  expect(Array.isArray(events)).toBeTruthy();
+
+  const privateEvents = events.filter(
+    event => event.visibility === 'private'
+  );
+
+  console.log('Private events exposed:', privateEvents);
+
+  expect(privateEvents.length).toBe(0);
+});
+```
+
+## Test Result
+
+```text
+Response keys: [ 'from', 'to', 'events' ]
+
+Private events exposed: 20
+
+Expected: 0
+Received: 20
+
+Test: FAILED
+```
+
+## Acceptance Criteria
+
+1. `GET /api/calendar` does not expose private booking records.
+2. The public calendar contains only information permitted by the specification.
+3. Private member names are not exposed.
+4. Private event purposes/titles are not exposed.
+5. Private booking details cannot be accessed by an unauthenticated visitor.
+6. The Playwright regression test passes with `Expected: 0` and `Received: 0`.
+7. Existing public calendar functionality continues to work for legitimate public events.
+
+## Regression Test
+
+Run:
+
+```bash
+npx playwright test app/tests/calendar-privacy.spec.js
+```
+
+**Current result:** FAIL — confirms the defect.  
+**Expected after fix:** PASS.
+
+## QA Classification
+
+**Requirement:** Private calendar information must remain private.  
+**Observed:** Public calendar API returns 20 private events with member/event details.  
+**Defect:** Privacy boundary is not enforced on the public calendar endpoint.  
+**Regression Coverage:** Automated Playwright API test added.

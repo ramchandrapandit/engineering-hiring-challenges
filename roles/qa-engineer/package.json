@@ -1,0 +1,16 @@
+{
+  "name": "qa-engineer",
+  "version": "1.0.0",
+  "description": "**We broke a booking system on purpose. Find what is wrong with it, prove it, and build\r the net that stops it coming back.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}
